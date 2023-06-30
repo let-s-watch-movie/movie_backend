@@ -62,18 +62,30 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public boolean updateUserInfo(String account, String password, String avatar, String sex,Integer age,String description){
+    public boolean updateUserInfo(String account,  String avatar, String sex,Integer age,String description){
         User user = userMapper.queryUserByAccount(account);
 
         if (user != null) {
             // 更新用户信息字段
-            user.setPassword(password);
+//            user.setPassword(password);
             user.setAvatar(avatar);
             user.setSex(sex);
             user.setDescription(description);
             user.setAge(age);
 
             userMapper.updateUserInfo(user);
+            return true;
+        }
+        return false;
+    }
+    public boolean updateUserPassword(String account,String old_password,String new_password){
+
+        User user = userMapper.queryUserByAccount(account);
+
+        if (user != null && user.getPassword().equals(old_password)) {
+            // 替换密码
+            user.setPassword(new_password);
+            userMapper.updateUserPassword(account,new_password);
             return true;
         }
         return false;

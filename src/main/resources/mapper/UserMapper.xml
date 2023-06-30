@@ -6,6 +6,13 @@
     <select id="queryUserByAccount" resultType="User">
         select * from users where account = #{account}
     </select>
+    <select id="getUsersWithinFiveKilometers" parameterType="map" resultType="com.example.movie.entity.User">
+        SELECT u.*
+        FROM users u
+        JOIN member m ON u.account = m.account
+        WHERE m.movie_id = #{movie_id}
+        AND ST_Distance_Sphere(Point(u.longitude, u.latitude), Point(#{longitude}, #{latitude})) &lt;= 5000;
+    </select>
     <insert id="insertUser" parameterType="User">
         INSERT INTO users (account, password,register_time)
         VALUES (#{account}, #{password},#{registerTime})
@@ -15,14 +22,12 @@
         WHERE account = #{account}
     </update>
     <update id="updateUserInfo" parameterType="User">
-        UPDATE users SET password = #{password},avatar = #{avatar},sex = #{sex},age = #{age},description = #{description}
+        UPDATE users SET avatar = #{avatar},sex = #{sex},age = #{age},description = #{description}
         WHERE account = #{account}
     </update>
-    <select id="getUsersWithinFiveKilometers" parameterType="map" resultType="com.example.movie.entity.User">
-        SELECT u.*
-        FROM users u
-        JOIN member m ON u.account = m.account
-        WHERE m.movie_id = #{movie_id}
-        AND ST_Distance_Sphere(Point(u.longitude, u.latitude), Point(#{longitude}, #{latitude})) &lt;= 5000;
-    </select>
+    <update id="updateUserPassword" >
+        UPDATE users SET password = #{new_password}
+        where account = #{account}
+    </update>
+
 </mapper>
