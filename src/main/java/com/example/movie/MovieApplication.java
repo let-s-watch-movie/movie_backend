@@ -11,6 +11,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @SpringBootApplication
+//@ComponentScan(basePackages = {"com.example.movie.config", "WebSocketConfig"})
 @MapperScan("com.example.movie.mapper")
 public class MovieApplication {
 	public static void main(String[] args) {

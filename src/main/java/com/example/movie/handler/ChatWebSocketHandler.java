@@ -1,5 +1,6 @@
 package com.example.movie.handler;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.socket.*;
 
 import java.io.IOException;
@@ -8,6 +9,11 @@ import java.util.List;
 
 public class ChatWebSocketHandler implements WebSocketHandler {
     private List<WebSocketSession> sessions = new ArrayList<>();
+
+    public ChatWebSocketHandler(SimpMessagingTemplate simpMessagingTemplate) {
+
+    }
+
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
