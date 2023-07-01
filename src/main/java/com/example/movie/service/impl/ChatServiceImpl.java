@@ -1,4 +1,5 @@
 package com.example.movie.service.impl;
+import com.example.movie.entity.ChatHistory;
 import com.example.movie.entity.ChatRequest;
 import com.example.movie.mapper.ChatMapper;
 import com.example.movie.mapper.UserMapper;
@@ -21,7 +22,9 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public void sendChatRequest(String inviterAccount, String receiverAccount) {
+    public void sendChatRequest(ChatHistory chatHistory) {
+        String inviterAccount = chatHistory.getSendingAccount();
+        String receiverAccount = chatHistory.getReceiverAccount();
         // 创建chat_request记录
         ChatRequest chatRequest = ChatRequest.builder()
                 .inviterAccount(inviterAccount)
@@ -30,7 +33,13 @@ public class ChatServiceImpl implements ChatService {
                 .inviteTime(LocalDateTime.now())
                 .build();
         // 调用对应的数据访问层方法，插入chat_request记录
+        System.out.println(inviterAccount);
         chatMapper.insertChatRequest(chatRequest);
+    }
+    @Override
+    public int queryChatRequest(ChatHistory chatHistory){
+        return chatMapper.queryChatRequest(chatHistory);
+
     }
 
     @Override
@@ -70,5 +79,11 @@ public class ChatServiceImpl implements ChatService {
 //            throw new ForbiddenException("Not authorized to terminate this chat");
 //        }
     }
+
+    @Override
+    public void sendChatHistory(ChatHistory chatHistory) {
+        chatMapper.insertChatHistory(chatHistory);
+    }
+
 
 }

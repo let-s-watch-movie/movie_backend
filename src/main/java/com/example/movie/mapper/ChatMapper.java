@@ -18,4 +18,5 @@ public interface ChatMapper {
     ChatRequest selectChatRequestById(Long chatId);
 
     void insertChatHistory(ChatHistory chatHistory);
+    int queryChatRequest(ChatHistory chatHistory);
 }

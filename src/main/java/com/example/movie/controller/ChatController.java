@@ -1,6 +1,8 @@
 package com.example.movie.controller;
-import com.example.movie.entity.*;
 
+import com.example.movie.entity.ChatHistory;
+import com.example.movie.entity.ChatMessage;
+import com.example.movie.entity.ChatRequest;
 import com.example.movie.mapper.ChatMapper;
 import com.example.movie.service.ChatService;
 import org.apache.ibatis.javassist.NotFoundException;
@@ -26,15 +28,26 @@ public class ChatController {
         this.chatMapper = chatMapper;
     }
 
+    //    @PostMapping("/request")
+//    public ResponseEntity<Object> sendChatRequest(@RequestParam("inviter_account") String inviterAccount,
+//                                                  @RequestParam("receiver_account") String receiverAccount,
+//                                                  @RequestParam("content") String content) {
+//        chatService.sendChatRequest(inviterAccount, receiverAccount);
+//        return ResponseEntity.ok().build();
+//    }
     @PostMapping("/request")
-    public ResponseEntity<Object> sendChatRequest(@RequestParam("inviter_account") String inviterAccount,
-                                                  @RequestParam("receiver_account") String receiverAccount,
-                                                  @RequestParam("content") String content) {
-        chatService.sendChatRequest(inviterAccount, receiverAccount);
+    public ResponseEntity<Object> sendChatRequest(@RequestBody ChatHistory chatHistory) {
+        chatHistory.setTimeStamp(LocalDateTime.now());
+        chatService.sendChatRequest(chatHistory);
+        //获取当前时间给timeStamp
+
+        chatService.sendChatHistory(chatHistory);
         return ResponseEntity.ok().build();
     }
-
-
+    @PostMapping("/queryRequest")
+    public int queryChatRequest(@RequestBody ChatHistory chatHistory) {
+        return chatService.queryChatRequest(chatHistory);
+    }
 
 
     @PostMapping("/request/{chatId}/accept")
