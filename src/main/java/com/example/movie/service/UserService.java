@@ -16,4 +16,5 @@ public interface UserService {
 	User queryUserByAccount(String account);
 
 	List<User> getUsersWithinFiveKilometers(String account,int movieId, double userLongitude, double userLatitude);
+
 }

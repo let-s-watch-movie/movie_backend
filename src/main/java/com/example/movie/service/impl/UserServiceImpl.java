@@ -15,7 +15,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     String currentWorkingDir = System.getProperty("user.dir");
-    String defaultAvatar = currentWorkingDir + '/'+ "src/main/resources/static/avatar/default.jpg";
+    String defaultAvatar = currentWorkingDir + '/' + "src/main/resources/static/avatar/default.jpg";
+
     @Override
     public boolean registerUser(String account, String password) {
 
@@ -39,19 +40,18 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean loginUser(String username, String password,Double longitude,Double latitude) {
+    public boolean loginUser(String username, String password, Double longitude, Double latitude) {
         User user = userMapper.queryUserByAccount(username);
         user.setLongitude(longitude);
         user.setLatitude(latitude);
-        if(user != null && user.getPassword().equals(password)){
+        if (user != null && user.getPassword().equals(password)) {
             userMapper.updateLocation(user);
             return true;
         }
         // 检查用户是否存在并验证密码
-		return false;
+        return false;
 
-	}
-
+    }
 
 
     @Override
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public boolean updateUserInfo(String account,  String avatar, String sex,Integer age,String description){
+    public boolean updateUserInfo(String account, String avatar, String sex, Integer age, String description) {
         User user = userMapper.queryUserByAccount(account);
 
         if (user != null) {
@@ -78,26 +78,28 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
-    public boolean updateUserPassword(String account,String old_password,String new_password){
+
+    public boolean updateUserPassword(String account, String old_password, String new_password) {
 
         User user = userMapper.queryUserByAccount(account);
 
         if (user != null && user.getPassword().equals(old_password)) {
             // 替换密码
             user.setPassword(new_password);
-            userMapper.updateUserPassword(account,new_password);
+            userMapper.updateUserPassword(account, new_password);
             return true;
         }
         return false;
     }
+
     @Override
     public User queryUserByAccount(String account) {
         return userMapper.queryUserByAccount(account);
     }
 
     @Override
-    public List<User> getUsersWithinFiveKilometers(String account,int movieId, double userLongitude, double userLatitude) {
-        return userMapper.getUsersWithinFiveKilometers(account,movieId, userLongitude, userLatitude);
+    public List<User> getUsersWithinFiveKilometers(String account, int movieId, double userLongitude, double userLatitude) {
+        return userMapper.getUsersWithinFiveKilometers(account, movieId, userLongitude, userLatitude);
     }
 
 

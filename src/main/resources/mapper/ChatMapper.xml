@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.movie.mapper.ChatMapper">
+    <insert id="insertChatRequest" parameterType="com.example.movie.entity.ChatRequest">
+        INSERT INTO chat_request (chat_id, inviter_account, receiver_account, status, invite_time)
+        VALUES (#{chatId}, #{inviterAccount}, #{receiverAccount}, #{status}, #{inviteTime})
+    </insert>
+
+    <update id="updateChatRequestStatus">
+        UPDATE chat_request SET status = #{status} WHERE chat_id = #{chatId}
+    </update>
+
+    <select id="selectChatRequestById" resultType="com.example.movie.entity.ChatRequest">
+        SELECT * FROM chat_request WHERE chat_id = #{chatId}
+    </select>
+
+    <insert id="insertChatHistory" parameterType="com.example.movie.entity.ChatHistory">
+        INSERT INTO chat_history (chat_history_id, sending_account, receiver_account, time_stamp, content)
+        VALUES (#{chatHistoryId}, #{sendingAccount}, #{receiverAccount}, #{timeStamp}, #{content})
+    </insert>
+</mapper>

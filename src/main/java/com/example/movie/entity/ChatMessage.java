@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class ChatMessage {
+
     private String sender;
+    private String receiver;
     private String content;
 
     // Getters and setters
