@@ -15,5 +15,5 @@ public interface UserService {
 	public boolean updateUserPassword(String account,String old_password,String new_password);
 	User queryUserByAccount(String account);
 
-	List<User> getUsersWithinFiveKilometers(int movieId, double userLongitude, double userLatitude);
+	List<User> getUsersWithinFiveKilometers(String account,int movieId, double userLongitude, double userLatitude);
 }

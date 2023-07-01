@@ -15,5 +15,5 @@ public interface UserMapper {
 	void updateLocation(User user);
 	void updateUserInfo(User user);
 	void updateUserPassword(String account,String new_password);
-	List<User> getUsersWithinFiveKilometers(@Param("movie_id") int movieId, @Param("longitude") double longitude, @Param("latitude") double latitude);
+	List<User> getUsersWithinFiveKilometers(@Param("account") String account,@Param("movie_id") int movieId, @Param("longitude") double longitude, @Param("latitude") double latitude);
 }

@@ -96,8 +96,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsersWithinFiveKilometers(int movieId, double userLongitude, double userLatitude) {
-        return userMapper.getUsersWithinFiveKilometers(movieId, userLongitude, userLatitude);
+    public List<User> getUsersWithinFiveKilometers(String account,int movieId, double userLongitude, double userLatitude) {
+        return userMapper.getUsersWithinFiveKilometers(account,movieId, userLongitude, userLatitude);
     }
 
 

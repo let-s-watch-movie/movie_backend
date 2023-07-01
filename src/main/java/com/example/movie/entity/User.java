@@ -19,7 +19,6 @@ import java.util.Date;
 //@ConfigurationProperties(prefix = "user")
 public class User {
 	@Id
-
 	private String account;
 	private String password;
 	private String avatar;
