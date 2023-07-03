@@ -13,7 +13,8 @@ public interface ChatMapper {
 
     void insertChatRequest(ChatRequest chatRequest);
 
-    void updateChatRequestStatus(Long chatId, Integer status);
+//    void updateChatRequestStatus(Long chatId, Integer status);
+void updateChatRequestStatus(ChatRequest chatRequest);
 
     ChatRequest selectChatRequestById(Long chatId);
 

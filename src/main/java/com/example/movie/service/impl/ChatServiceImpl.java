@@ -42,42 +42,58 @@ public class ChatServiceImpl implements ChatService {
 
     }
 
+
+//    public void acceptChatRequest(Long chatId) {
+//        // 更新chat_request表的记录，将状态更新为已接受（1）
+//        chatMapper.updateChatRequestStatus(chatId, 1);
+//    }
     @Override
-    public void acceptChatRequest(Long chatId) {
+    public void acceptChatRequest(ChatRequest chatRequest) {
+        chatRequest.setStatus(1);
         // 更新chat_request表的记录，将状态更新为已接受（1）
-        chatMapper.updateChatRequestStatus(chatId, 1);
+        chatMapper.updateChatRequestStatus(chatRequest);
     }
 
     @Override
-    public void refuseChatRequest(Long chatId) {
+    public void refuseChatRequest(ChatRequest chatRequest) {
         // 更新chat_request表的记录，将状态更新为已拒绝（2）
-        chatMapper.updateChatRequestStatus(chatId, 2);
+        chatRequest.setStatus(2);
+        chatMapper.updateChatRequestStatus(chatRequest);
     }
-//为什么在ChatServiceImpl中的方法提示Method does not override method from its superclass?
-    @Override
-    public void terminateChat(Long chatId, String account) throws NotFoundException {
-        // 判断当前操作用户是发起者还是接收者
-        ChatRequest chatRequest = chatMapper.selectChatRequestById(chatId);
-        if (chatRequest == null) {
-            throw new NotFoundException("Chat request not found");
-        }
-
-        if (account.equals(chatRequest.getInviterAccount())) {
-            // 发起者终止
-//            if (chatRequest.getStatus() == 1) {
-//                throw new BadRequestException("Cannot terminate an accepted chat");
-//            }
-            chatMapper.updateChatRequestStatus(chatId, 3);
-        } else if (account.equals(chatRequest.getReceiverAccount())) {
-            // 接收者终止
-//            if (chatRequest.getStatus() == 1) {
-//                throw new BadRequestException("Cannot terminate an accepted chat");
-//            }
-            chatMapper.updateChatRequestStatus(chatId, 4);
-        }
-//        else {
-//            throw new ForbiddenException("Not authorized to terminate this chat");
+//    @Override
+//    public void terminateChat(Long chatId, String account) throws NotFoundException {
+//        // 判断当前操作用户是发起者还是接收者
+//        ChatRequest chatRequest = chatMapper.selectChatRequestById(chatId);
+//        if (chatRequest == null) {
+//            throw new NotFoundException("Chat request not found");
 //        }
+//
+//        if (account.equals(chatRequest.getInviterAccount())) {
+//            // 发起者终止
+////            if (chatRequest.getStatus() == 1) {
+////                throw new BadRequestException("Cannot terminate an accepted chat");
+////            }
+//            chatMapper.updateChatRequestStatus(chatId, 3);
+//        } else if (account.equals(chatRequest.getReceiverAccount())) {
+//            // 接收者终止
+////            if (chatRequest.getStatus() == 1) {
+////                throw new BadRequestException("Cannot terminate an accepted chat");
+////            }
+//            chatMapper.updateChatRequestStatus(chatId, 4);
+//        }
+////        else {
+////            throw new ForbiddenException("Not authorized to terminate this chat");
+////        }
+//    }
+    @Override
+    public void inviterTerminateChat(ChatRequest chatRequest){
+        chatRequest.setStatus(3);
+        chatMapper.updateChatRequestStatus(chatRequest);
+    }
+    @Override
+    public void receiverTerminateChat(ChatRequest chatRequest){
+        chatRequest.setStatus(4);
+        chatMapper.updateChatRequestStatus(chatRequest);
     }
 
     @Override

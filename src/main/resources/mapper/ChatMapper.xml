@@ -16,7 +16,8 @@
     </insert>
 
     <update id="updateChatRequestStatus">
-        UPDATE chat_request SET status = #{status} WHERE chat_id = #{chatId}
+        UPDATE chat_request SET status = #{status}
+        WHERE inviter_account = #{inviterAccount} and receiver_account = #{receiverAccount}
     </update>
 
 

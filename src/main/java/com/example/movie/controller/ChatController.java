@@ -37,9 +37,10 @@ public class ChatController {
 //    }
     @PostMapping("/request")
     public ResponseEntity<Object> sendChatRequest(@RequestBody ChatHistory chatHistory) {
+        //获取当前时间给timeStamp
         chatHistory.setTimeStamp(LocalDateTime.now());
         chatService.sendChatRequest(chatHistory);
-        //获取当前时间给timeStamp
+
 
         chatService.sendChatHistory(chatHistory);
         return ResponseEntity.ok().build();
@@ -50,22 +51,32 @@ public class ChatController {
     }
 
 
-    @PostMapping("/request/{chatId}/accept")
-    public ResponseEntity<Object> acceptChatRequest(@PathVariable Long chatId) {
-        chatService.acceptChatRequest(chatId);
+//    @PostMapping("/request/{chatId}/accept")
+//    public ResponseEntity<Object> acceptChatRequest(@PathVariable Long chatId) {
+//        chatService.acceptChatRequest(chatId);
+//        return ResponseEntity.ok().build();
+//    }
+@PostMapping("/accept")
+public ResponseEntity<Object> acceptChatRequest(@RequestBody ChatRequest  chatRequest) {
+    chatService.acceptChatRequest(chatRequest);
+    return ResponseEntity.ok().build();
+}
+
+
+    @PostMapping("/refuse")
+    public ResponseEntity<Object> refuseChatRequest(@RequestBody ChatRequest  chatRequest) {
+        chatService.refuseChatRequest(chatRequest);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/request/{chatId}/refuse")
-    public ResponseEntity<Object> refuseChatRequest(@PathVariable Long chatId) {
-        chatService.refuseChatRequest(chatId);
+    @PostMapping("/inviterTerminate")
+    public ResponseEntity<Object> inviterTerminateChat(@RequestBody ChatRequest  chatRequest)  {
+        chatService.inviterTerminateChat(chatRequest);
         return ResponseEntity.ok().build();
     }
-
-    @PostMapping("/{chatId}/terminate")
-    public ResponseEntity<Object> terminateChat(@PathVariable Long chatId, Principal principal) throws NotFoundException {
-        String account = principal.getName();
-        chatService.terminateChat(chatId, account);
+    @PostMapping("/receiverTerminate")
+    public ResponseEntity<Object> receiverTerminateChat(@RequestBody ChatRequest  chatRequest)  {
+        chatService.receiverTerminateChat(chatRequest);
         return ResponseEntity.ok().build();
     }
 
