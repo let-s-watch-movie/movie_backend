@@ -6,9 +6,15 @@
     <select id="selectChatRequestById" resultType="com.example.movie.entity.ChatRequest">
         SELECT * FROM chat_request WHERE chat_id = #{chatId}
     </select>
-    <select id="queryChatRequest">
+    <select id="queryChatRequest" resultType="integer">
         SELECT status FROM chat_request
         WHERE inviter_account = #{sendingAccount} AND receiver_account = #{receiverAccount}
+    </select>
+    <select id="queryChatHistory" resultType="com.example.movie.entity.ChatHistory">
+        SELECT * FROM chat_history
+        WHERE sending_account = #{sendingAccount} AND receiver_account = #{receiverAccount}
+        AND status = 0
+        ORDER BY time_stamp ASC
     </select>
     <insert id="insertChatRequest" parameterType="com.example.movie.entity.ChatRequest">
         INSERT INTO chat_request (chat_id, inviter_account, receiver_account, status, invite_time)
@@ -19,8 +25,6 @@
         UPDATE chat_request SET status = #{status}
         WHERE inviter_account = #{inviterAccount} and receiver_account = #{receiverAccount}
     </update>
-
-
 
     <insert id="insertChatHistory" parameterType="com.example.movie.entity.ChatHistory">
         INSERT INTO chat_history (chat_history_id, sending_account, receiver_account, time_stamp, content)

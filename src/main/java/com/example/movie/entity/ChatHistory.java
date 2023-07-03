@@ -22,4 +22,5 @@ public class ChatHistory {
     private String receiverAccount;
     private LocalDateTime timeStamp;
     private String content;
+    private Integer status=0;
 }

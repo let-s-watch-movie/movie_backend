@@ -14,10 +14,11 @@ public interface ChatMapper {
     void insertChatRequest(ChatRequest chatRequest);
 
 //    void updateChatRequestStatus(Long chatId, Integer status);
-void updateChatRequestStatus(ChatRequest chatRequest);
+    void updateChatRequestStatus(ChatRequest chatRequest);
 
     ChatRequest selectChatRequestById(Long chatId);
 
     void insertChatHistory(ChatHistory chatHistory);
-    int queryChatRequest(ChatHistory chatHistory);
+    Integer queryChatRequest(ChatHistory chatHistory);
+    List<ChatHistory> queryChatHistory(ChatHistory chatHistory);
 }

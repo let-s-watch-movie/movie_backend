@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Service(value = "chatService")
@@ -37,7 +38,7 @@ public class ChatServiceImpl implements ChatService {
         chatMapper.insertChatRequest(chatRequest);
     }
     @Override
-    public int queryChatRequest(ChatHistory chatHistory){
+    public Integer queryChatRequest(ChatHistory chatHistory){
         return chatMapper.queryChatRequest(chatHistory);
 
     }
@@ -101,5 +102,7 @@ public class ChatServiceImpl implements ChatService {
         chatMapper.insertChatHistory(chatHistory);
     }
 
-
+    public List<ChatHistory> queryChatHistory(ChatHistory chatHistory){
+        return chatMapper.queryChatHistory(chatHistory);
+    }
 }
