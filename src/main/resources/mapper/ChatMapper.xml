@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.movie.mapper.ChatMapper">
+    <!-- ChatMapper.xml -->
+    <select id="getHistoryMessage" resultType="com.example.movie.entity.ChatHistory">
+        SELECT *
+        FROM chat_history
+        WHERE sending_account = #{fromUser} AND receiver_account = #{toUser} AND time_stamp > date_sub(CURRENT_TIMESTAMP, interval #{days} day)
+        ORDER BY time_stamp
+    </select>
+
+    <insert id="saveMessage" parameterType="com.example.movie.entity.ChatHistory">
+        INSERT INTO chat_history (sending_account, receiver_account, content)
+        VALUES (#{sendingAccount}, #{receiverAccount}, #{content})
+    </insert>
+</mapper>

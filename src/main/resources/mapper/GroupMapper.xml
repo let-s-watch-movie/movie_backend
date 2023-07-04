@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.movie.mapper.GroupMapper">
+    <!-- 创建电影用户组 -->
+    <insert id="createGroup" parameterType="java.util.List">
+        INSERT INTO movie_group (movie_id, total_num)
+        VALUES
+        <foreach collection="list" item="movieId" separator=",">
+            (#{movieId}, 0)
+        </foreach>
+    </insert>
+
+    <!-- 查询电影用户组 -->
+    <select id="queryMovieGroup" parameterType="java.lang.Integer" resultType="com.example.movie.entity.User">
+        SELECT * FROM users JOIN member
+        ON users.account = member.account AND member.movie_id = #{movie_id}
+    </select>
+</mapper>

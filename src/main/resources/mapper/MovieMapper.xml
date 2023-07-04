@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.movie.mapper.MovieMapper">
+    <!-- 批量插入电影 -->
+    <insert id="insertMovie" parameterType="com.example.movie.entity.Movie">
+        INSERT INTO movie_list (movie_id, poster, movie_name, released_time, star, score, summary, director, language, duration, short_comment, src_location, category, video)
+        VALUES
+        (#{movieId}, #{poster}, #{movieName}, #{releasedTime}, #{star}, #{score}, #{summary}, #{director}, #{language}, #{duration}, #{shortComment}, #{srcLocation}, #{category}, #{video})
+    </insert>
+
+    <update id="updatePlayTime" parameterType="java.lang.Integer">
+        UPDATE movie_list SET play_time = CURRENT_TIMESTAMP WHERE movie_id = #{movieId}
+    </update>
+
+
+
+    <!-- 根据电影ID查询电影 -->
+    <select id="queryMovieById" parameterType="java.lang.Integer" resultType="com.example.movie.entity.Movie">
+        SELECT * FROM movie_list WHERE movie_id = #{id}
+    </select>
+
+    <!-- 查询所有电影 -->
+    <select id="queryMovieList" resultType="com.example.movie.entity.Movie">
+        SELECT * FROM movie_list WHERE DATE(play_time) = CURDATE()
+    </select>
+</mapper>

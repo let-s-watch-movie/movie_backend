@@ -1,12 +1,10 @@
 package com.example.movie;
 
+import com.example.movie.service.impl.MovieServiceImpl;
+import com.example.movie.exception.GetMovieException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 @SpringBootTest
 class MovieApplicationTests {
@@ -14,11 +12,14 @@ class MovieApplicationTests {
 //	private User user;
 	
 	@Autowired
-	DataSource dateSource;
+	MovieServiceImpl movieService;
 	@Test
-	void contextLoads() throws SQLException {
-		Connection conn = dateSource.getConnection();
-		conn.close();
+	void contextLoads() {
+		try{
+			movieService.insertMovieList();
+		} catch (GetMovieException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

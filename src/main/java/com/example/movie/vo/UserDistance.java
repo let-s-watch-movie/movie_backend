@@ -1,19 +1,18 @@
-package com.example.movie.entity;
+package com.example.movie.vo;
 
+import com.example.movie.entity.User;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import lombok.Setter;
 
 import java.util.Date;
 
-// 指定对应application.yml配置文件中的的值前缀并绑定
-@Component
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserDistance {
 	private String account;
 	private String password;
 	private String avatar;
@@ -21,4 +20,7 @@ public class User {
 	private Double longitude;
 	private Double latitude;
 	private Date registerTime;
+	private double distance;
+	
+	
 }
