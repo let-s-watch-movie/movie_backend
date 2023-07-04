@@ -30,6 +30,14 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.geographiclib/GeographicLib-Java -->
+        <dependency>
+            <groupId>net.sf.geographiclib</groupId>
+            <artifactId>GeographicLib-Java</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -76,20 +84,23 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.32</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
-            <scope>provided</scope>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.5</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -105,15 +116,8 @@
             <version>2.7.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.timo-reymann</groupId>
-            <artifactId>spring-boot-date-and-time-starter</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <scope>true</scope>
         </dependency>
 
     </dependencies>

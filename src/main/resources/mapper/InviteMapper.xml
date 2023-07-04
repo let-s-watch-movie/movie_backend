@@ -8,7 +8,7 @@
         INSERT INTO invitation (invite_id, movie_id, inviter_account, receiver_account, status, invite_time)
         VALUES (#{inviteId},#{movieId}, #{inviterAccount}, #{receiverAccount}, #{status}, #{inviteTime})
     </insert>
-    <update id="updateChatRequest">
+    <update id="updateInviteRequest">
         UPDATE invitation SET status = #{status}
         WHERE inviter_account = #{inviterAccount} and receiver_account = #{receiverAccount}
     </update>

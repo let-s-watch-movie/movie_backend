@@ -48,7 +48,7 @@ public class InviteController {
         inviteService.acceptChatRequest(inviteRequest);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/refusse")
+    @PostMapping("/refuse")
     public ResponseEntity<Object> refuseChatRequest(@RequestBody InviteRequest inviteRequest) {
         inviteService.refuseChatRequest(inviteRequest);
         return ResponseEntity.ok().build();

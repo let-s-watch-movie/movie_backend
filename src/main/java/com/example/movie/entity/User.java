@@ -16,7 +16,6 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@ConfigurationProperties(prefix = "user")
 public class User {
 	@Id
 	private String account;

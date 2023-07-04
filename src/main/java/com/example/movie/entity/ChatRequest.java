@@ -23,4 +23,3 @@ public class ChatRequest {
     private Integer status;
     private LocalDateTime inviteTime;
 }
-

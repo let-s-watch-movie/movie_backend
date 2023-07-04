@@ -1,6 +1,5 @@
 package com.example.movie.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +21,5 @@ public class ChatHistory {
     private String receiverAccount;
     private LocalDateTime timeStamp;
     private String content;
-    private Integer status=0;
+    private Integer status = 0;
 }

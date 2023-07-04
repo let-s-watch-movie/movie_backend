@@ -110,7 +110,7 @@ public class ChatController {
 //
 //        return ResponseEntity.ok().build();
 //    }
-    @PostMapping("/sendMassage")
+    @PostMapping("/sendMessage")
     public ResponseEntity<Object> sendMessage(@RequestBody ChatHistory chatHistory) {
         Integer status = chatService.queryChatRequest(chatHistory);
         if (status == 1) {
@@ -121,7 +121,7 @@ public class ChatController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("queryMassage")
+    @PostMapping("queryMessage")
     public List<ChatHistory> queryMassage(@RequestBody ChatHistory chatHistory) {
         List<ChatHistory> chatHistoryList = chatService.queryChatHistory(chatHistory);
 //        ArrayList chatHistoryId = new ArrayList<>();
@@ -135,3 +135,4 @@ public class ChatController {
     }
 
 }
+
