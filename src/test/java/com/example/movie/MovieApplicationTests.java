@@ -8,18 +8,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class MovieApplicationTests {
-//	@Autowired
-//	private User user;
-	
-	@Autowired
-	MovieServiceImpl movieService;
-	@Test
-	void contextLoads() {
-		try{
-			movieService.insertMovieList();
-		} catch (GetMovieException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
+
 }
