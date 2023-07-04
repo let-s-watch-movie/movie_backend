@@ -49,8 +49,16 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         // 检查用户是否存在并验证密码
+        user.setStatus(1);
+        userMapper.updateStatus(user);
         return false;
 
+    }
+    public boolean logoutUser(String account){
+        User user = userMapper.queryUserByAccount(account);
+        user.setStatus(0);
+        userMapper.updateStatus(user);
+        return true;
     }
 
 

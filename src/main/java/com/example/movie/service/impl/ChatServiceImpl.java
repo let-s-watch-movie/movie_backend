@@ -39,7 +39,7 @@ public class ChatServiceImpl implements ChatService {
         chatMapper.insertChatRequest(chatRequest);
     }
     @Override
-    public Integer queryChatRequest(ChatHistory chatHistory){
+    public ChatHistory queryChatRequest(ChatHistory chatHistory){
         return chatMapper.queryChatRequest(chatHistory);
 
     }
@@ -109,4 +109,9 @@ public class ChatServiceImpl implements ChatService {
     public void setSent(Integer id){
         chatMapper.setSent(id);
     }
+
+    public List<ChatRequest> queryChatRequestByReceiver(ChatHistory chatHistory){
+        return chatMapper.queryChatRequestByReceiver(chatHistory);
+    }
+
 }

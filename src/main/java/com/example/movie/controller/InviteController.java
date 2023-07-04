@@ -43,6 +43,11 @@ public class InviteController {
         return inviteService.queryInviteRequest(inviteRequest);
 
     }
+    @PostMapping("/queryRequestByReceiver")
+    public List<InviteRequest> queryChatRequestByReceiver(@RequestBody InviteRequest inviteRequest) {
+        return inviteService.queryInviteRequestByReceiver(inviteRequest);
+
+    }
     @PostMapping("/accept")
     public ResponseEntity<Object> acceptChatRequest(@RequestBody InviteRequest inviteRequest) {
         inviteService.acceptChatRequest(inviteRequest);

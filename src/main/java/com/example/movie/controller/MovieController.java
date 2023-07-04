@@ -55,4 +55,8 @@ public class MovieController {
 		}
 		System.out.println("get movie list over!");
 	}
+	@GetMapping("/movie/in")
+	public Response getMovieInList(@RequestParam int movie_id,@RequestParam String account) {
+		return Response.Success(movieService.isExist(movie_id, account));
+	}
 }

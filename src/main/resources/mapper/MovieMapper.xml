@@ -26,4 +26,8 @@
     <select id="queryMovieList" resultType="com.example.movie.entity.Movie">
         SELECT * FROM movie_list WHERE DATE(play_time) = CURDATE()
     </select>
+    <select id="isExist" resultType="java.lang.Boolean">
+        SELECT count(*)>0
+        where movie_id = #{movie_id} and account = #{account}
+    </select>
 </mapper>

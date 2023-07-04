@@ -17,4 +17,5 @@ public interface UserService {
 
 	List<User> getUsersWithinFiveKilometers(String account,int movieId, double userLongitude, double userLatitude);
 
+	boolean logoutUser(String account);
 }

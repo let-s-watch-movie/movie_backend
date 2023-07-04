@@ -20,7 +20,9 @@ public interface ChatService {
     //发送一条聊天记录
     public void sendChatHistory(ChatHistory chatHistory);
 
-    Integer queryChatRequest(ChatHistory chatHistory);
+    ChatHistory queryChatRequest(ChatHistory chatHistory);
     public List<ChatHistory> queryChatHistory(ChatHistory chatHistory);
     public void setSent(Integer id);
+
+    List<ChatRequest> queryChatRequestByReceiver(ChatHistory chatHistory);
 }

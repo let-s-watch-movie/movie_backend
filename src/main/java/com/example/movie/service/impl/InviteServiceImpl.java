@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.movie.service.InviteService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service(value = "inviteService")
 public class InviteServiceImpl implements InviteService{
@@ -32,5 +33,9 @@ public class InviteServiceImpl implements InviteService{
     public void refuseChatRequest(InviteRequest inviteRequest){
         inviteRequest.setStatus((2));
         inviteMapper.updateInviteRequest(inviteRequest);
+    }
+    public List<InviteRequest> queryInviteRequestByReceiver(InviteRequest inviteRequest){
+
+        return inviteMapper.queryInviteRequestByReceiver(inviteRequest);
     }
 }

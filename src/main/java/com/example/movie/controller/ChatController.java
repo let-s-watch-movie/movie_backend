@@ -4,6 +4,7 @@ import com.example.movie.entity.ChatHistory;
 import com.example.movie.entity.ChatRequest;
 import com.example.movie.mapper.ChatMapper;
 import com.example.movie.service.ChatService;
+import com.example.movie.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping("/chat")
 public class ChatController {
     private final ChatService chatService;
-
+    private Response response;
     private final ChatMapper chatMapper;
 
     @Autowired
@@ -38,19 +39,29 @@ public class ChatController {
 //        return ResponseEntity.ok().build();
 //    }
     @PostMapping("/request")
-    public ResponseEntity<Object> sendChatRequest(@RequestBody ChatHistory chatHistory) {
+    public Response sendChatRequest(@RequestBody ChatHistory chatHistory) {
+//        Integer hasSent = chatService.queryChatRequest(chatHistory).getStatus();
         //获取当前时间给timeStamp
-        chatHistory.setTimeStamp(LocalDateTime.now());
-        chatService.sendChatRequest(chatHistory);
+        ChatHistory chatHistory1 = chatService.queryChatRequest(chatHistory);
+        if(chatHistory1 == null){
+            chatHistory.setTimeStamp(LocalDateTime.now());
+            chatService.sendChatRequest(chatHistory);
+            chatService.sendChatHistory(chatHistory);
+            return response.Success("send successfully");
+        }
 
-
-//        chatService.sendChatHistory(chatHistory);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Error("send failed");
     }
 
-    @PostMapping("/queryRequest")
-    public int queryChatRequest(@RequestBody ChatHistory chatHistory) {
-        return chatService.queryChatRequest(chatHistory);
+
+//    @PostMapping("/queryRequest")
+//    public int queryChatRequest(@RequestBody ChatHistory chatHistory) {
+//        return chatService.queryChatRequest(chatHistory);
+//    }
+    @PostMapping("/queryRequestByReceiver")
+    public List<ChatRequest> queryChatRequestByReceiver(@RequestBody ChatHistory chatHistory) {
+        return chatService.queryChatRequestByReceiver(chatHistory);
     }
 
 
@@ -111,18 +122,19 @@ public class ChatController {
 //        return ResponseEntity.ok().build();
 //    }
     @PostMapping("/sendMessage")
-    public ResponseEntity<Object> sendMessage(@RequestBody ChatHistory chatHistory) {
-        Integer status = chatService.queryChatRequest(chatHistory);
+    public Response sendMessage(@RequestBody ChatHistory chatHistory) {
+        Integer status = chatService.queryChatRequest(chatHistory).getStatus();
         if (status == 1) {
             chatHistory.setTimeStamp(LocalDateTime.now());
             chatService.sendChatHistory(chatHistory);
-            return ResponseEntity.ok().build();
+            return new Response().Success("Message sent successfully.");
         }
-        return ResponseEntity.badRequest().build();
+
+        return new Response().Error("Invalid or inactive chat.");
     }
 
     @PostMapping("queryMessage")
-    public List<ChatHistory> queryMassage(@RequestBody ChatHistory chatHistory) {
+    public Response queryMassage(@RequestBody ChatHistory chatHistory) {
         List<ChatHistory> chatHistoryList = chatService.queryChatHistory(chatHistory);
 //        ArrayList chatHistoryId = new ArrayList<>();
         for(ChatHistory chat:chatHistoryList){
@@ -130,9 +142,12 @@ public class ChatController {
             Integer id = chat.getChatHistoryId();
             chatService.setSent(id);
         }
-//        return chatService.queryChatHistory(chatHistory);
-        return chatHistoryList;
+
+        return response.Success(chatHistoryList);
+
     }
+
+
 
 }
 

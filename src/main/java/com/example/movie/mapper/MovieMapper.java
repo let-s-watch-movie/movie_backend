@@ -22,5 +22,7 @@ public interface MovieMapper {
 	
 	@Transactional
 	List<Movie> queryMovieList();
-	
+
+
+	boolean  isExist(Integer movie_id,String account);
 }

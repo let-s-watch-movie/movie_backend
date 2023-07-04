@@ -27,6 +27,7 @@ public class User {
 	private Double longitude;
 	private Double latitude;
 	private Date registerTime;
+	private int status;
 	
 //	@Value("2023-06-26 17:35:11")
 //	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)

@@ -13,5 +13,7 @@ public interface MovieService {
 	void insertMovieList() throws GetMovieException;
 	
 	public List<Movie> queryMovieList() throws MovieException;
+
+	boolean isExist(Integer id,String account);
 	
 }

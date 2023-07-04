@@ -16,4 +16,8 @@
         SELECT status FROM invitation
         WHERE inviter_account = #{inviterAccount} AND receiver_account = #{receiverAccount}
     </select>
+    <select id="queryInviteRequestByReceiver" resultType="com.example.movie.entity.InviteRequest">
+        SELECT status FROM invitation
+        WHERE receiver_account = #{receiverAccount}
+    </select>
 </mapper>

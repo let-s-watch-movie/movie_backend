@@ -20,7 +20,9 @@ public interface ChatMapper {
     ChatRequest selectChatRequestById(Long chatId);
 
     void insertChatHistory(ChatHistory chatHistory);
-    Integer queryChatRequest(ChatHistory chatHistory);
+    ChatHistory queryChatRequest(ChatHistory chatHistory);
     List<ChatHistory> queryChatHistory(ChatHistory chatHistory);
     void setSent(Integer id);
+
+    List<ChatRequest> queryChatRequestByReceiver(ChatHistory chatHistory);
 }

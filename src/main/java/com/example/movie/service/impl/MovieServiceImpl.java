@@ -74,5 +74,8 @@ public class MovieServiceImpl implements MovieService {
 		
 		return movie;
 	}
+	public boolean isExist(Integer id, String account){
+        return movieMapper.isExist(id, account);
+    }
 }
 

@@ -30,6 +30,10 @@
         UPDATE users SET password = #{new_password}
         where account = #{account}
     </update>
+    <update id="updateStatus">
+        UPDATE users SET status = #{status}
+        where account = #{account}
+    </update>
 
 
 </mapper>

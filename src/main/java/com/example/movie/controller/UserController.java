@@ -2,6 +2,7 @@ package com.example.movie.controller;
 
 import com.example.movie.entity.User;
 import com.example.movie.service.UserService;
+import com.example.movie.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private final UserService userService;
+    private Response response;
     String currentWorkingDir = System.getProperty("user.dir");
     public String uploadPath = "src/main/resources/static/avatar";
 
@@ -27,20 +29,41 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
-        userService.registerUser(user.getAccount(), user.getPassword());
-        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
+    public Response registerUser(@RequestBody User user) {
+//        return userService.registerUser(user.getAccount(), user.getPassword());
+        boolean isRegistered = userService.registerUser(user.getAccount(), user.getPassword());
+        if(isRegistered){
+            return response.Success("User registered successfully.");
+        }
+        return response.Error("User already exists.");
+//        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Boolean> loginUser(@RequestBody User user) {
+    public Response loginUser(@RequestBody User user) {
         boolean loginSuccessful = userService.loginUser(user.getAccount(), user.getPassword(), user.getLongitude(), user.getLatitude());
-        return ResponseEntity.ok(loginSuccessful);
+//        return userService.loginUser(user.getAccount(), user.getPassword(), user.getLongitude(), user.getLatitude());
+//        return ResponseEntity.ok(loginSuccessful);
+        if(loginSuccessful){
+            return response.Success("User logged in successfully.");
+
+        }
+        return response.Error("User does not exist.");
+    }
+    @PostMapping("/logout")
+    public Response logoutUser(@RequestBody User user) {
+        boolean logoutSuccessful = userService.logoutUser(user.getAccount());
+//        return ResponseEntity.ok(logoutSuccessful);
+        if(logoutSuccessful){
+            return response.Success("User logged out successfully.");
+        }
+        return response.Error("User does not exist.");
     }
 
     @PostMapping("/getUserInfo")
     public User getUserInfo(@RequestBody User user) {
         User userInfo = userService.getUserInfo(user.getAccount());
+
         return userInfo;
     }
 
