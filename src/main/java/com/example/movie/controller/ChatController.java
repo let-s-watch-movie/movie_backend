@@ -20,13 +20,13 @@ import java.util.List;
 @RequestMapping("/chat")
 public class ChatController {
     private final ChatService chatService;
-    private final SimpMessagingTemplate messagingTemplate;
+
     private final ChatMapper chatMapper;
 
     @Autowired
-    public ChatController(ChatService chatService, SimpMessagingTemplate messagingTemplate, ChatMapper chatMapper) {
+    public ChatController(ChatService chatService, ChatMapper chatMapper) {
         this.chatService = chatService;
-        this.messagingTemplate = messagingTemplate;
+
         this.chatMapper = chatMapper;
     }
 
