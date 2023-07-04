@@ -1,14 +1,26 @@
 package com.example.movie.service;
 
-import com.example.movie.entity.ChatHistory;
-import com.example.movie.exception.ChatException;
-import org.springframework.stereotype.Service;
+import com.example.movie.entity.*;
+import org.apache.ibatis.javassist.NotFoundException;
 
 import java.util.List;
 
-
 public interface ChatService {
-	void saveMessage(ChatHistory chatHistory) throws ChatException;
-	List<ChatHistory> getHistoryMessage(String fromUser,String toUser,Integer days) throws ChatException;
-	
+    public void sendChatRequest(ChatHistory chatHistory);
+
+//    public void acceptChatRequest(Long chatId);
+
+    public void acceptChatRequest(ChatRequest chatRequest);
+    public void refuseChatRequest(ChatRequest chatRequest);
+
+//    public void terminateChat(Long chatId, String account) throws NotFoundException;
+    public void inviterTerminateChat(ChatRequest chatRequest);
+    public void receiverTerminateChat(ChatRequest chatRequest);
+
+    //发送一条聊天记录
+    public void sendChatHistory(ChatHistory chatHistory);
+
+    Integer queryChatRequest(ChatHistory chatHistory);
+    public List<ChatHistory> queryChatHistory(ChatHistory chatHistory);
+    public void setSent(Integer id);
 }

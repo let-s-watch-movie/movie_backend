@@ -1,21 +1,25 @@
 package com.example.movie.entity;
 
-import lombok.*;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 @Data
-@Component
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ChatHistory {
-	String sendingAccount;
-	String receiverAccount;
-	Date timeStamp;
-	String content;
-	Integer chatHistoryId;
-	Integer status;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer chatHistoryId;
+    private String sendingAccount;
+    private String receiverAccount;
+    private LocalDateTime timeStamp;
+    private String content;
+    private Integer status = 0;
 }

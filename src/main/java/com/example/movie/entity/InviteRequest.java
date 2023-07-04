@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ChatRequest {
+public class InviteRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long chatId;
+    private int inviteId;
+    private int movieId;
     private String inviterAccount;
     private String receiverAccount;
-    private Integer status;
-    private LocalDateTime inviteTime;
+    private int status;
+    private LocalDate inviteTime;
 }

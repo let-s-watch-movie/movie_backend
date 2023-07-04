@@ -22,5 +22,4 @@ public class UserDistance {
 	private Date registerTime;
 	private double distance;
 	
-	
 }

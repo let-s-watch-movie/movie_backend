@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<input id="sender" type="text" placeholder="用户名">
+<input id="message" type="text" placeholder="消息">
+<button id="sendBtn">发送</button>
+<div id="chatMessages"></div>
+
+<script>
+        var socket = new WebSocket("ws://localhost:8081/chat");
+        socket.onopen = function(event) {
+            console.log("WebSocket连接已打开");
+        };
+
+        socket.onmessage = function(event) {
+            var message = JSON.parse(event.data);
+            var chatMessages = document.getElementById("chatMessages");
+            var content = message.sender + ": " + message.content;
+            chatMessages.innerHTML += "<p>" + content + "</p>";
+        };
+
+        socket.onclose = function(event) {
+            console.log("WebSocket连接已关闭");
+        };
+
+        $("#sendBtn").click(function() {
+            var sender = $("#sender").val();
+            var message = $("#message").val();
+            var chatMessage = {
+                sender: sender,
+                content: message
+            };
+
+            socket.send(JSON.stringify(chatMessage));
+            $("#message").val("");
+
+            // 显示发送的消息
+             var sentMessage = "<p><strong>" + sender + ": </strong>" + message + "</p>";
+             var chatMessages = document.getElementById("chatMessages");
+            chatMessages.innerHTML += sentMessage;
+        });
+
+</script>
+</body>
+</html>

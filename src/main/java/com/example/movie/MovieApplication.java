@@ -11,9 +11,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("com.example.movie.mapper")
 public class MovieApplication {
 	public static void main(String[] args) {
-		System.out.println("hello");
+//		System.out.println("hello");
 		SpringApplication.run(MovieApplication.class, args);
 		
 	}
 	
 }
+

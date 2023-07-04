@@ -3,16 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.movie.mapper.ChatMapper">
-    <!-- ChatMapper.xml -->
-    <select id="getHistoryMessage" resultType="com.example.movie.entity.ChatHistory">
-        SELECT *
-        FROM chat_history
-        WHERE sending_account = #{fromUser} AND receiver_account = #{toUser} AND time_stamp > date_sub(CURRENT_TIMESTAMP, interval #{days} day)
-        ORDER BY time_stamp
+    <select id="selectChatRequestById" resultType="com.example.movie.entity.ChatRequest">
+        SELECT * FROM chat_request WHERE chat_id = #{chatId}
     </select>
+    <select id="queryChatRequest" resultType="integer">
+        SELECT status FROM chat_request
+        WHERE inviter_account = #{sendingAccount} AND receiver_account = #{receiverAccount}
+    </select>
+    <select id="queryChatHistory" resultType="com.example.movie.entity.ChatHistory">
+        SELECT * FROM chat_history
+        WHERE sending_account = #{sendingAccount} AND receiver_account = #{receiverAccount}
+        AND status = 0
+        ORDER BY time_stamp ASC
+    </select>
+    <insert id="insertChatRequest" parameterType="com.example.movie.entity.ChatRequest">
+        INSERT INTO chat_request (chat_id, inviter_account, receiver_account, status, invite_time)
+        VALUES (#{chatId}, #{inviterAccount}, #{receiverAccount}, #{status}, #{inviteTime})
+    </insert>
 
-    <insert id="saveMessage" parameterType="com.example.movie.entity.ChatHistory">
-        INSERT INTO chat_history (sending_account, receiver_account, content)
-        VALUES (#{sendingAccount}, #{receiverAccount}, #{content})
+    <update id="updateChatRequestStatus">
+        UPDATE chat_request SET status = #{status}
+        WHERE inviter_account = #{inviterAccount} and receiver_account = #{receiverAccount}
+    </update>
+    <update id="setSent">
+        UPDATE chat_history SET status = 1
+        WHERE chat_history_id = #{id}
+    </update>
+
+    <insert id="insertChatHistory" parameterType="com.example.movie.entity.ChatHistory">
+        INSERT INTO chat_history (chat_history_id, sending_account, receiver_account, time_stamp, content)
+        VALUES (#{chatHistoryId}, #{sendingAccount}, #{receiverAccount}, #{timeStamp}, #{content})
     </insert>
 </mapper>

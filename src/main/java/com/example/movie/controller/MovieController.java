@@ -45,7 +45,7 @@ public class MovieController {
 		return Response.Success(movie);
 	}
 	
-	@Scheduled(initialDelay = 24*60*60*1000, fixedRate = 24 * 60 * 60 * 1000) // 每24小时执行一次
+	@Scheduled(initialDelay = 20*1000, fixedRate = 24 * 60 * 60 * 1000) // 每24小时执行一次
 	public void GetHotMovie(){
 		System.out.println("start get movie list...");
 		try{
