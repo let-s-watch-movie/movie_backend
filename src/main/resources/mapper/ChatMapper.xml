@@ -25,6 +25,10 @@
         UPDATE chat_request SET status = #{status}
         WHERE inviter_account = #{inviterAccount} and receiver_account = #{receiverAccount}
     </update>
+    <update id="setSent">
+        UPDATE chat_history SET status = 1
+        WHERE chat_history_id = #{id}
+    </update>
 
     <insert id="insertChatHistory" parameterType="com.example.movie.entity.ChatHistory">
         INSERT INTO chat_history (chat_history_id, sending_account, receiver_account, time_stamp, content)

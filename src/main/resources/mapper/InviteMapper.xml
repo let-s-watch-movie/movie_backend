@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.movie.mapper.InviteMapper">
+
+    <insert id="insertInviteRequest">
+        INSERT INTO invitation (invite_id, movie_id, inviter_account, receiver_account, status, invite_time)
+        VALUES (#{inviteId},#{movieId}, #{inviterAccount}, #{receiverAccount}, #{status}, #{inviteTime})
+    </insert>
+    <update id="updateChatRequest">
+        UPDATE invitation SET status = #{status}
+        WHERE inviter_account = #{inviterAccount} and receiver_account = #{receiverAccount}
+    </update>
+    <select id="queryInviteRequest" resultType="java.lang.Integer">
+        SELECT status FROM invitation
+        WHERE inviter_account = #{inviterAccount} AND receiver_account = #{receiverAccount}
+    </select>
+</mapper>

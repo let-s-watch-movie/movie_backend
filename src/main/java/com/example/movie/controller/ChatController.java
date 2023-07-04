@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class ChatController {
         chatService.sendChatRequest(chatHistory);
 
 
-        chatService.sendChatHistory(chatHistory);
+//        chatService.sendChatHistory(chatHistory);
         return ResponseEntity.ok().build();
     }
 
@@ -122,6 +123,15 @@ public class ChatController {
 
     @PostMapping("queryMassage")
     public List<ChatHistory> queryMassage(@RequestBody ChatHistory chatHistory) {
-        return chatService.queryChatHistory(chatHistory);
+        List<ChatHistory> chatHistoryList = chatService.queryChatHistory(chatHistory);
+//        ArrayList chatHistoryId = new ArrayList<>();
+        for(ChatHistory chat:chatHistoryList){
+//            chatHistoryId.add(chat.getChatHistoryId());
+            Integer id = chat.getChatHistoryId();
+            chatService.setSent(id);
+        }
+//        return chatService.queryChatHistory(chatHistory);
+        return chatHistoryList;
     }
+
 }

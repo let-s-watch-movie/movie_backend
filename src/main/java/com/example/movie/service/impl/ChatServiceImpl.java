@@ -105,4 +105,7 @@ public class ChatServiceImpl implements ChatService {
     public List<ChatHistory> queryChatHistory(ChatHistory chatHistory){
         return chatMapper.queryChatHistory(chatHistory);
     }
+    public void setSent(Integer id){
+        chatMapper.setSent(id);
+    }
 }

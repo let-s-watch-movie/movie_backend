@@ -21,4 +21,5 @@ public interface ChatMapper {
     void insertChatHistory(ChatHistory chatHistory);
     Integer queryChatRequest(ChatHistory chatHistory);
     List<ChatHistory> queryChatHistory(ChatHistory chatHistory);
+    void setSent(Integer id);
 }

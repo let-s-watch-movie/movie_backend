@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.movie.mapper.UserMapper">
-    <select id="queryUserByAccount" resultType="User">
+    <select id="queryUserByAccount" resultType="com.example.movie.entity.User">
         select * from users where account = #{account}
     </select>
     <select id="getUsersWithinFiveKilometers" parameterType="map" resultType="com.example.movie.entity.User">
@@ -14,15 +14,15 @@
         AND ST_Distance_Sphere(Point(u.longitude, u.latitude), Point(#{longitude}, #{latitude})) &lt;= 5000
         AND u.account != #{account};
     </select>
-    <insert id="insertUser" parameterType="User">
+    <insert id="insertUser" parameterType="com.example.movie.entity.User">
         INSERT INTO users (account, password,register_time)
         VALUES (#{account}, #{password},#{registerTime})
     </insert>
-    <update id="updateLocation" parameterType="User">
+    <update id="updateLocation" parameterType="com.example.movie.entity.User">
         UPDATE users SET longitude = #{longitude} ,latitude = #{latitude}
         WHERE account = #{account}
     </update>
-    <update id="updateUserInfo" parameterType="User">
+    <update id="updateUserInfo" parameterType="com.example.movie.entity.User">
         UPDATE users SET avatar = #{avatar},sex = #{sex},age = #{age},description = #{description}
         WHERE account = #{account}
     </update>

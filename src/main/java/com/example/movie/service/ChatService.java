@@ -21,4 +21,5 @@ public interface ChatService {
 
     Integer queryChatRequest(ChatHistory chatHistory);
     public List<ChatHistory> queryChatHistory(ChatHistory chatHistory);
+    public void setSent(Integer id);
 }
