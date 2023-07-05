@@ -22,7 +22,10 @@ public class UserController {
     private final UserService userService;
     private Response response;
     String currentWorkingDir = System.getProperty("user.dir");
-    public String uploadPath = "./src/main/resources/static/avatar";
+//    public String uploadPath = "./src/main/resources/static/avatar";
+public String uploadPath = "http://localhost:8080/avatar/";
+
+
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -81,9 +84,10 @@ public class UserController {
             // 保存头像文件到指定路径
             String fileName = UUID.randomUUID() + "." + getFileExtension(avatarFile.getOriginalFilename());
 //            String filePath = currentWorkingDir + "/" + uploadPath + "/" + fileName;
-            String filePath = uploadPath + "/" + fileName;
-            avatarFile.transferTo(new File(filePath));
-
+//            String filePath = uploadPath + "/" + fileName;
+            String temp =  currentWorkingDir  + "/src/main/resources/static/avatar/" + fileName;
+            String filePath = uploadPath + fileName;
+            avatarFile.transferTo(new File(temp));
 //			user.setAvatar(filePath);
             avatar = filePath;
         }

@@ -49,7 +49,6 @@ public class InviteController {
     public Response queryChatRequest(@RequestBody InviteRequest inviteRequest) {
         int status = inviteService.queryInviteRequest(inviteRequest);
         return response.Success(status);
-
     }
     @PostMapping("/queryRequestByReceiver")
     public Response queryChatRequestByReceiver(@RequestBody InviteRequest inviteRequest) {

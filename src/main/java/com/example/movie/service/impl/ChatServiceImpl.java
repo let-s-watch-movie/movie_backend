@@ -27,12 +27,14 @@ public class ChatServiceImpl implements ChatService {
     public void sendChatRequest(ChatHistory chatHistory) {
         String inviterAccount = chatHistory.getSendingAccount();
         String receiverAccount = chatHistory.getReceiverAccount();
+        String content = chatHistory.getContent();
         // 创建chat_request记录
         ChatRequest chatRequest = ChatRequest.builder()
                 .inviterAccount(inviterAccount)
                 .receiverAccount(receiverAccount)
                 .status(0)
                 .inviteTime(LocalDateTime.now())
+                .content(content)
                 .build();
         // 调用对应的数据访问层方法，插入chat_request记录
         System.out.println(inviterAccount);

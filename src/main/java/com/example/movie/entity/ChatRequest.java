@@ -22,4 +22,5 @@ public class ChatRequest {
     private String receiverAccount;
     private Integer status;
     private LocalDateTime inviteTime;
+    private String content;
 }

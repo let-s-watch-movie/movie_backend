@@ -9,6 +9,9 @@ spring:
   reactor:
     debug-agent:
       enabled: true
+  web:
+    resources:
+      static-locations: classpath:/static/
 
 mybatis:
   type-aliases-package: com.example.movie.entity

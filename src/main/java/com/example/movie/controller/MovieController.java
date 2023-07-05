@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
+@Component
 public class MovieController {
 	@Autowired
 	MovieServiceImpl movieService;
@@ -60,7 +62,7 @@ public class MovieController {
 	public Response getMovieInList(@RequestParam int movie_id,@RequestParam String account) {
 		return Response.Success(movieService.isExist(movie_id, account));
 	}
-	@GetMapping("/movie/self")
+	@PostMapping("/movie/self")
 	public Response getSelfMovie(@RequestBody User user){
 		List<Movie> movies;
 		String account = user.getAccount();

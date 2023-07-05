@@ -22,8 +22,8 @@
     </select>
 
     <insert id="insertChatRequest" parameterType="com.example.movie.entity.ChatRequest">
-        INSERT INTO chat_request (chat_id, inviter_account, receiver_account, status, invite_time)
-        VALUES (#{chatId}, #{inviterAccount}, #{receiverAccount}, #{status}, #{inviteTime})
+        INSERT INTO chat_request (chat_id, inviter_account, receiver_account, status, invite_time,content)
+        VALUES (#{chatId}, #{inviterAccount}, #{receiverAccount}, #{status}, #{inviteTime},#{content})
     </insert>
 
     <update id="updateChatRequestStatus">

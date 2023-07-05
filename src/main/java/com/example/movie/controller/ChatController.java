@@ -46,7 +46,7 @@ public class ChatController {
         if(chatHistory1 == null){
             chatHistory.setTimeStamp(LocalDateTime.now());
             chatService.sendChatRequest(chatHistory);
-            chatService.sendChatHistory(chatHistory);
+//            chatService.sendChatHistory(chatHistory);
             return response.Success("send successfully");
         }
 
