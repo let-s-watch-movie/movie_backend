@@ -1,6 +1,7 @@
 package com.example.movie.controller;
 
 import com.example.movie.entity.Movie;
+import com.example.movie.entity.User;
 import com.example.movie.exception.GetMovieException;
 import com.example.movie.service.impl.MovieServiceImpl;
 import com.example.movie.util.Response;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -60,8 +61,9 @@ public class MovieController {
 		return Response.Success(movieService.isExist(movie_id, account));
 	}
 	@GetMapping("/movie/self")
-	public Response getSelfMovie(@RequestParam String account){
+	public Response getSelfMovie(@RequestBody User user){
 		List<Movie> movies;
+		String account = user.getAccount();
 		try{
 			movies = movieService.queryInMovie(account);
 		}catch (MovieException e){

@@ -8,6 +8,7 @@ import com.example.movie.entity.InviteRequest;
 import com.example.movie.mapper.InviteMapper;
 
 import com.example.movie.service.InviteService;
+import com.example.movie.util.Response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,39 +25,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/invite")
 public class InviteController {
-    @Autowired
+
     private final InviteService inviteService;
     private final InviteMapper inviteMapper;
-
+    private Response response;
+    @Autowired
+    public InviteController(InviteService inviteService, InviteMapper inviteMapper) {
+        this.inviteService = inviteService;
+        this.inviteMapper = inviteMapper;
+    }
 
     @PostMapping("/request")
-    public ResponseEntity<Object> sendInviteRequest(@RequestBody InviteRequest inviteRequest) {
+    public Response sendInviteRequest(@RequestBody InviteRequest inviteRequest) {
         inviteService.sendInviteRequest(inviteRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("sendInviteRequest successfully");
     }
     @PostMapping("/queryRequest")
-    public int queryChatRequest(@RequestBody InviteRequest inviteRequest) {
-        return inviteService.queryInviteRequest(inviteRequest);
+    public Response queryChatRequest(@RequestBody InviteRequest inviteRequest) {
+        int status = inviteService.queryInviteRequest(inviteRequest);
+        return response.Success(status);
 
     }
     @PostMapping("/queryRequestByReceiver")
-    public List<InviteRequest> queryChatRequestByReceiver(@RequestBody InviteRequest inviteRequest) {
-        return inviteService.queryInviteRequestByReceiver(inviteRequest);
+    public Response queryChatRequestByReceiver(@RequestBody InviteRequest inviteRequest) {
+//        return inviteService.queryInviteRequestByReceiver(inviteRequest);
+        List<InviteRequest>inviteRequestList = inviteService.queryInviteRequestByReceiver(inviteRequest);
+        return response.Success(inviteRequestList);
 
     }
     @PostMapping("/accept")
-    public ResponseEntity<Object> acceptChatRequest(@RequestBody InviteRequest inviteRequest) {
+    public Response acceptChatRequest(@RequestBody InviteRequest inviteRequest) {
         inviteService.acceptChatRequest(inviteRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("accept successfully");
     }
+
     @PostMapping("/refuse")
-    public ResponseEntity<Object> refuseChatRequest(@RequestBody InviteRequest inviteRequest) {
+    public Response refuseChatRequest(@RequestBody InviteRequest inviteRequest) {
         inviteService.refuseChatRequest(inviteRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("refuse successfully");
     }
 
 

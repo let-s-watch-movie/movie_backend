@@ -148,7 +148,7 @@ public class ChatController {
         for(ChatHistory chat:chatHistoryList){
 //            chatHistoryId.add(chat.getChatHistoryId());
             Integer id = chat.getChatHistoryId();
-            chatService.setSent(id);
+//            chatService.setSent(id);
         }
 
         return response.Success(chatHistoryList);
