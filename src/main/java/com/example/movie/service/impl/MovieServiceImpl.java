@@ -77,5 +77,18 @@ public class MovieServiceImpl implements MovieService {
 	public boolean isExist(Integer id, String account){
         return movieMapper.isExist(id, account);
     }
+	@Override
+	public List<Movie> queryInMovie(String account) throws MovieException {
+		List<Movie> movies;
+
+		try{
+			movies = movieMapper.queryInMovie(account);
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new MovieException(e.getMessage(),"获取个人想看电影失败");
+		}
+
+		return movies;
+	}
 }
 

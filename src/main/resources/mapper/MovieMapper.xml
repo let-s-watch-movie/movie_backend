@@ -31,4 +31,9 @@
         FROM member
         where movie_id = #{movie_id} and account = #{account}
     </select>
+    <select id="queryInMovie" parameterType="java.lang.String" resultType="com.example.movie.entity.Movie">
+    SELECT * FROM movie_list JOIN member
+    ON movie_list.movie_id = member.movie_id
+    AND member.account = #{account}
+    </select>
 </mapper>

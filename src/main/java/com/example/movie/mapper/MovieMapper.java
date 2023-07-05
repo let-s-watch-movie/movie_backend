@@ -25,4 +25,5 @@ public interface MovieMapper {
 
 
 	boolean  isExist(Integer movie_id,String account);
+	List<Movie> queryInMovie(String account);
 }

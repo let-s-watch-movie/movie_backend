@@ -59,4 +59,16 @@ public class MovieController {
 	public Response getMovieInList(@RequestParam int movie_id,@RequestParam String account) {
 		return Response.Success(movieService.isExist(movie_id, account));
 	}
+	@GetMapping("/movie/self")
+	public Response getSelfMovie(@RequestParam String account){
+		List<Movie> movies;
+		try{
+			movies = movieService.queryInMovie(account);
+		}catch (MovieException e){
+			System.out.println(e.getMessage());
+			return Response.Error(e.getTip());
+		}
+
+		return Response.Success(movies);
+	}
 }
