@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
     private Response response;
     String currentWorkingDir = System.getProperty("user.dir");
-    public String uploadPath = "src/main/resources/static/avatar";
+    public String uploadPath = "./src/main/resources/static/avatar";
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -48,7 +48,7 @@ public class UserController {
             return response.Success("User logged in successfully.");
 
         }
-        return response.Error("User does not exist.");
+        return response.Error("User does not exist or password is incorrect.");
     }
     @PostMapping("/logout")
     public Response logoutUser(@RequestBody User user) {
@@ -80,7 +80,8 @@ public class UserController {
         if (!avatarFile.isEmpty()) {
             // 保存头像文件到指定路径
             String fileName = UUID.randomUUID() + "." + getFileExtension(avatarFile.getOriginalFilename());
-            String filePath = currentWorkingDir + "/" + uploadPath + "/" + fileName;
+//            String filePath = currentWorkingDir + "/" + uploadPath + "/" + fileName;
+            String filePath = uploadPath + "/" + fileName;
             avatarFile.transferTo(new File(filePath));
 
 //			user.setAvatar(filePath);

@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     String currentWorkingDir = System.getProperty("user.dir");
-    String defaultAvatar = currentWorkingDir + '/' + "src/main/resources/static/avatar/default.jpg";
-
+//    String defaultAvatar = currentWorkingDir + '/' + "src/main/resources/static/avatar/default.jpg";
+    String defaultAvatar = "./src/main/resources/static/avatar/default.jpg";
     @Override
     public boolean registerUser(String account, String password) {
 

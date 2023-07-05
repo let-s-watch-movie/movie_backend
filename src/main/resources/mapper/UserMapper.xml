@@ -15,8 +15,8 @@
         AND u.account != #{account};
     </select>
     <insert id="insertUser" parameterType="com.example.movie.entity.User">
-        INSERT INTO users (account, password,register_time)
-        VALUES (#{account}, #{password},#{registerTime})
+        INSERT INTO users (account,avatar, password,register_time)
+        VALUES (#{account}, #{avatar},#{password},#{registerTime})
     </insert>
     <update id="updateLocation" parameterType="com.example.movie.entity.User">
         UPDATE users SET longitude = #{longitude} ,latitude = #{latitude}

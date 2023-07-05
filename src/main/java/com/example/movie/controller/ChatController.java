@@ -60,8 +60,10 @@ public class ChatController {
 //        return chatService.queryChatRequest(chatHistory);
 //    }
     @PostMapping("/queryRequestByReceiver")
-    public List<ChatRequest> queryChatRequestByReceiver(@RequestBody ChatHistory chatHistory) {
-        return chatService.queryChatRequestByReceiver(chatHistory);
+    public Response queryChatRequestByReceiver(@RequestBody ChatHistory chatHistory) {
+//        return chatService.queryChatRequestByReceiver(chatHistory);
+        List<ChatRequest>chatRequestList = chatService.queryChatRequestByReceiver(chatHistory);
+        return response.Success(chatRequestList);
     }
 
 
@@ -71,28 +73,34 @@ public class ChatController {
 //        return ResponseEntity.ok().build();
 //    }
     @PostMapping("/accept")
-    public ResponseEntity<Object> acceptChatRequest(@RequestBody ChatRequest chatRequest) {
+    public Response acceptChatRequest(@RequestBody ChatRequest chatRequest) {
         chatService.acceptChatRequest(chatRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("accept successfully");
     }
+
 
 
     @PostMapping("/refuse")
-    public ResponseEntity<Object> refuseChatRequest(@RequestBody ChatRequest chatRequest) {
+    public Response refuseChatRequest(@RequestBody ChatRequest chatRequest) {
         chatService.refuseChatRequest(chatRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("refuse successfully");
     }
 
+
     @PostMapping("/inviterTerminate")
-    public ResponseEntity<Object> inviterTerminateChat(@RequestBody ChatRequest chatRequest) {
+    public Response inviterTerminateChat(@RequestBody ChatRequest chatRequest) {
         chatService.inviterTerminateChat(chatRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("inviterTerminate successfully");
     }
 
     @PostMapping("/receiverTerminate")
-    public ResponseEntity<Object> receiverTerminateChat(@RequestBody ChatRequest chatRequest) {
+    public Response receiverTerminateChat(@RequestBody ChatRequest chatRequest) {
         chatService.receiverTerminateChat(chatRequest);
-        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().build();
+        return response.Success("receiverTerminate successfully");
     }
 
     //    @PostMapping("/{chatId}/message")
