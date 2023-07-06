@@ -50,6 +50,12 @@ public class InviteController {
         int status = inviteService.queryInviteRequest(inviteRequest);
         return response.Success(status);
     }
+    @PostMapping("/queryRequestAll")
+    public Response queryChatRequestAll(@RequestBody InviteRequest inviteRequest) {
+        List<InviteRequest>inviteRequestList =inviteMapper.queryInviteRequestAll(inviteRequest);
+        return response.Success(inviteRequestList);
+    }
+
     @PostMapping("/queryRequestByReceiver")
     public Response queryChatRequestByReceiver(@RequestBody InviteRequest inviteRequest) {
 //        return inviteService.queryInviteRequestByReceiver(inviteRequest);

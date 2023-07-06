@@ -16,4 +16,5 @@ public interface InviteMapper {
     void updateInviteRequest(InviteRequest inviteRequest);
 
     List<InviteRequest> queryInviteRequestByReceiver(InviteRequest inviteRequest);
+    List<InviteRequest> queryInviteRequestAll(InviteRequest inviteRequest);
 }

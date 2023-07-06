@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,14 @@ public class ChatController {
 //        Integer hasSent = chatService.queryChatRequest(chatHistory).getStatus();
         //获取当前时间给timeStamp
         ChatHistory chatHistory1 = chatService.queryChatRequest(chatHistory);
+        String sendingAccount = chatHistory.getSendingAccount();
+        String receiverAccount = chatHistory.getReceiverAccount();
+        ChatRequest chatRequest = ChatRequest.builder()
+                .inviterAccount(receiverAccount)
+                .receiverAccount(sendingAccount)
+                .status(1)
+                .inviteTime(LocalDateTime.now()).build();
+        chatMapper.insertChatRequest(chatRequest);
         if(chatHistory1 == null){
             chatHistory.setTimeStamp(LocalDateTime.now());
             chatService.sendChatRequest(chatHistory);
@@ -75,6 +85,31 @@ public class ChatController {
     @PostMapping("/accept")
     public Response acceptChatRequest(@RequestBody ChatRequest chatRequest) {
         chatService.acceptChatRequest(chatRequest);
+        ChatHistory chatHistory1 = ChatHistory.builder()
+                                .sendingAccount(chatRequest.getInviterAccount())
+                                .receiverAccount(chatRequest.getReceiverAccount())
+                                .build();
+        ChatHistory chatHistory2 = chatMapper.queryChatRequest(chatHistory1);
+        if(chatHistory2 == null){
+            return response.Error("accept failed");
+        }
+        ChatHistory chatHistory = ChatHistory.builder()
+                                .sendingAccount(chatRequest.getInviterAccount())
+                                .receiverAccount(chatHistory2.getReceiverAccount())
+                                .timeStamp(LocalDateTime.now())
+                                .content(chatHistory2.getContent())
+                                .status(0)
+                                .build();
+        System.out.println("-----------");
+        System.out.println("This is chatHistory1");
+        System.out.println(chatHistory1);
+        System.out.println("-----------");
+        System.out.println("This is chatHistory2");
+        System.out.println(chatHistory2);
+        System.out.println("-----------");
+        System.out.println("This is chatHistory");
+        System.out.println(chatHistory);
+        chatService.sendChatHistory(chatHistory);
 //        return ResponseEntity.ok().build();
         return response.Success("accept successfully");
     }

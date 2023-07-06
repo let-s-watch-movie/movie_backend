@@ -20,4 +20,8 @@
         SELECT * FROM invitation
         WHERE receiver_account = #{receiverAccount}
     </select>
+    <select id="queryInviteRequestAll" resultType="com.example.movie.entity.InviteRequest">
+        SELECT * FROM invitation
+        WHERE inviter_account = #{inviterAccount} OR receiver_account = #{inviterAccount}
+    </select>
 </mapper>

@@ -54,4 +54,6 @@ public class Movie {
 	
 	@JSONField(name = "vd")
 	public String video;
+	@JSONField(name = "pubDesc",serialize = false)
+	public String pubDesc;
 }

@@ -70,7 +70,7 @@ public String uploadPath = "http://localhost:8080/avatar/";
         return userInfo;
     }
 
-    @PostMapping("/updateUserInfo")
+    @GetMapping("/updateUserInfo")
     public boolean updateUserInfo(@RequestParam("account") String account,
 //								  @RequestParam("password") String password,
                                   @RequestParam("avatar") MultipartFile avatarFile,
@@ -98,11 +98,12 @@ public String uploadPath = "http://localhost:8080/avatar/";
         return isUpdated;
     }
 
-    @PostMapping("/updateUserPassword")
-    public boolean updateUserPassword(@RequestParam("account") String account,
+    @GetMapping("/updateUserPassword")
+    public Response updateUserPassword(@RequestParam("account") String account,
                                       @RequestParam("old_password") String old_password,
                                       @RequestParam("new_password") String new_password) {
-        return userService.updateUserPassword(account, old_password, new_password);
+        userService.updateUserPassword(account, old_password, new_password);
+        return response.Success("User password updated successfully.");
 
 
     }
