@@ -12,6 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class MovieApplication {
 	public static void main(String[] args) {
 //		System.out.println("hello");
+//		System.out.println("2t34");
+//		System.out.println("3t34");
 		SpringApplication.run(MovieApplication.class, args);
 		
 	}

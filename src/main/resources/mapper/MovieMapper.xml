@@ -24,7 +24,7 @@
 
     <!-- 查询所有电影 -->
     <select id="queryMovieList" resultType="com.example.movie.entity.Movie">
-        SELECT * FROM movie_list WHERE DATE(play_time) = CURDATE()
+        SELECT * FROM movie_list WHERE DATE(play_time) = CURDATE() ORDER BY released_time DESC;
     </select>
     <select id="isExist" resultType="java.lang.Boolean">
         SELECT count(*)>0

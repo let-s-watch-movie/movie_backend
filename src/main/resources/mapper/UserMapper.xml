@@ -11,7 +11,7 @@
         FROM users u
         JOIN member m ON u.account = m.account
         WHERE m.movie_id = #{movie_id}
-        AND ST_Distance_Sphere(Point(u.longitude, u.latitude), Point(#{longitude}, #{latitude})) &lt;= 5000
+        AND ST_Distance_Sphere(Point(u.longitude, u.latitude), Point(#{longitude}, #{latitude})) &lt;= 50000
         AND u.account != #{account};
     </select>
     <insert id="insertUser" parameterType="com.example.movie.entity.User">

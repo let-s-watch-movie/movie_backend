@@ -44,6 +44,7 @@ public class ChatController {
     public Response sendChatRequest(@RequestBody ChatHistory chatHistory) {
 //        Integer hasSent = chatService.queryChatRequest(chatHistory).getStatus();
         //获取当前时间给timeStamp
+//        List<>
         ChatHistory chatHistory1 = chatService.queryChatRequest(chatHistory);
         String sendingAccount = chatHistory.getSendingAccount();
         String receiverAccount = chatHistory.getReceiverAccount();
@@ -100,15 +101,15 @@ public class ChatController {
                                 .content(chatHistory2.getContent())
                                 .status(0)
                                 .build();
-        System.out.println("-----------");
-        System.out.println("This is chatHistory1");
-        System.out.println(chatHistory1);
-        System.out.println("-----------");
-        System.out.println("This is chatHistory2");
-        System.out.println(chatHistory2);
-        System.out.println("-----------");
-        System.out.println("This is chatHistory");
-        System.out.println(chatHistory);
+//        System.out.println("-----------");
+//        System.out.println("This is chatHistory1");
+//        System.out.println(chatHistory1);
+//        System.out.println("-----------");
+//        System.out.println("This is chatHistory2");
+//        System.out.println(chatHistory2);
+//        System.out.println("-----------");
+//        System.out.println("This is chatHistory");
+//        System.out.println(chatHistory);
         chatService.sendChatHistory(chatHistory);
 //        return ResponseEntity.ok().build();
         return response.Success("accept successfully");
@@ -183,7 +184,7 @@ public class ChatController {
         for(ChatHistory chat:chatHistoryList){
 //            chatHistoryId.add(chat.getChatHistoryId());
             Integer id = chat.getChatHistoryId();
-//            chatService.setSent(id);
+            chatService.setSent(id);
         }
 
         return response.Success(chatHistoryList);
