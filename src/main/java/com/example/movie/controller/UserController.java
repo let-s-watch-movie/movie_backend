@@ -64,14 +64,22 @@ public String uploadPath = "http://localhost:8080/avatar/";
     }
 
     @PostMapping("/getUserInfo")
-    public User getUserInfo(@RequestBody User user) {
-        User userInfo = userService.getUserInfo(user.getAccount());
+    public Response getUserInfo(@RequestBody User user) {
+        User userInfo;
+        try{
+        userInfo = userService.getUserInfo(user.getAccount());}catch (Exception e){
+            System.out.println(e.getMessage());
+            return response.Error("User does not exist.");
+        }
 
-        return userInfo;
+
+//        return userInfo;
+        return response.Success(userInfo);
     }
 
-    @GetMapping("/updateUserInfo")
-    public boolean updateUserInfo(@RequestParam("account") String account,
+
+    @PostMapping("/updateUserInfo")
+    public Response updateUserInfo(@RequestParam("account") String account,
 //								  @RequestParam("password") String password,
                                   @RequestParam("avatar") MultipartFile avatarFile,
                                   @RequestParam("sex") String sex,
@@ -94,8 +102,9 @@ public String uploadPath = "http://localhost:8080/avatar/";
 
 //		boolean isUpdated = userService.updateUserInfo(account, password, avatar, sex,age,description);
         boolean isUpdated = userService.updateUserInfo(account, avatar, sex, age, description);
-
-        return isUpdated;
+        if(isUpdated)
+            return response.Success("User info updated successfully.");
+        return response.Error("User does not exist.");
     }
 
     @GetMapping("/updateUserPassword")
